@@ -1,0 +1,20 @@
+Comunicazione da 192.168.100.100 (mittente) a 192.168.100.103 (destinatario)
+
+- L'invio del comando di ping dal terminale ha avviato la richiesta di ping che ha creato una richiesta ICMP Echo. 
+- L'IP del destinatario si trova nella stessa subnet del device mittente.
+- Entra in gioco il protocollo ARP che mediante request identifica il MAC address associato all'IP del destinatario.
+- Il pacchetto arriva allo switch al quale il mittente è connesso.
+- Il frame parte dallo switch e arriva al destinatario.
+- Ci sarà la risposta che seguirà step e processo inverso.
+
+
+
+Comunicazione da 192.168.100.100 (mittente) a 192.168.200.100 (destinatario)
+Il tragitto seguito è: 192.168.100.100 - Switch 1 - Router 1 - Switch 0 - 192.168.200.100 
+
+- Iniziamo il Ping e generiamo l'ICMP Echo Request message
+- In questo caso l'IP destinatario non è nella stessa subnet e non è nemmeno il broadcast address, motivo per il quale verrà mandato al broadcast. Andando con ordine:
+- Parte l'ARP request per trovare la corrispondenza IP MACaddress
+- Viene mandato dal mittente (di MAC 00D0.FF20.8958) allo switch a cui è direttamente connesso con MAC address 0050.0FAC.9501 per essere mandato poi al Router 1 di MAC 000C.85EB.B543 che renderà possibile l'invio all'IP destinatario inizialmente cercato
+- Dal Router 1 il pacchetto giunge allo switch 0, con MAC 000C.85EB.B543 che nella propria tabella riconosce il MAC del destinatario (ovvero il device che ha IP 192.168.200.100 e MAC 0050.0FAC.9502) e lo manda.
+- Anche qui seguirà la risposta con step e processi inversi.
