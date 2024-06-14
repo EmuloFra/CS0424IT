@@ -1,0 +1,43 @@
+La backdoor, ovvero la *porta sul retro* è una tecnica utilizzata post successo di un'attacco verso un target per mantenere un accesso rapido e sicuro al sistema stesso, evitando la normale procedura di autenticazione.
+
+I cybercriminal sfruttano utenti inconsapevoli per lanciare **RAT**, remote administrative tool program sulla macchina del target per installare le backdoor.
+In seguito all'installazione della stessa, i criminali potranno accedere all'organizzazione anche se la vulnerabilità originale (usata per attaccare il sistema) viene corretta.
+
+Le backdoor operano in modo invisibile per l'utente finale, sono progettate per eludere i meccanismi di sicurezza standard (firewall e sistema di rilevamento delle intrusioni).
+
+Le backdoor possono essere installate anche tramite software apparentemente innocuo, aggiornamenti di sistema compromessi o tramite zero-days exploits.
+Oltre al lato software, possiamo ritrovare anche backdoor hardware.
+Queste sono inserite nei componenti fisici del computer (possono essere firmware o chip) per permettere l'accesso al basso livello del sistema.
+Spesso, le backdoor, lavorano in sinergia con i rootkit, ovvero programmi che offuscano la presenza della backdoor al task manager o altri strumenti di sicurezza.
+
+
+
+
+
+Circa il codice, in primis sono stati importati i moduli 
+- socket, utile alla comunicazione di rete;
+- platform, per ottenere informazioni sulle piattaforme harware e software;
+- OS, per interagire con il sistema operativo.
+
+
+Successivamente abbiamo impostato SRV_ADDR come stringa vuota per indicare che il server ascolterà su ogni interfaccia di rete disponibile; e SRV_PORT in ascolto sulla porta 1234.
+
+E' stato poi creato e configurato il socket, il socket definito è IPv4 TCP ed è stato associato all'indirizzo ed alla porta mediante bind.
+Fatto questo, è stato messo in ascolto per accettare la connessione.
+La connessione in entrata viene accettata con .accept per poi stampare il messaggio "client connected": address.
+
+
+Arriviamo, quindi, al ciclo while principale per gestire le richieste.
+Questo è un ciclo infinito durante il quale il server prova a ricevere i dati dal client mediante connection.recv(1024).
+In caso di errore il ciclo continua.
+
+
+Comando 1:
+Se il client invia il comando 1, il server risponde con una stringa descrivente OS ed architettura della macchina su cui è in esecuzione il server usando platform.platform() e platform-machine().
+
+Comando 2:
+Se il client invia il comando 2, il server cerca di leggere il percorso di una directory e di elencare i file qui siti (os.listdir()).
+Se il percorso è valido, allora invia la lista; altrimenti manda l'erroe "Wrong path".
+
+Comando 0:
+Se il client invia il comando 0, il server chiude la connessione corrente e ne accetta una nuova.
