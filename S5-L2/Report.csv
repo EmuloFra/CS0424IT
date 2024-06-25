@@ -1,0 +1,8 @@
+"host","ip_address","region","country","latitude","longitude","notes","module"
+"autodiscover.datashields.tech","","","","","","","brute_hosts"
+"autodiscover.datashields.tech","153.92.2.19","","","","","","brute_hosts"
+"autodiscover.mail.hostinger.com","","","","","","","brute_hosts"
+"connect.hostinger.com","","","","","","","brute_hosts"
+"mauriziomarcantoni.org","152.184.3.2","Norvegia","","","","","user_defined"
+"www.datashields.tech","","","","","","","brute_hosts"
+"www.datashields.tech","34.120.137.41","","","","","","brute_hosts"
