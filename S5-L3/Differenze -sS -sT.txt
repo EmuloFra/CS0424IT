@@ -1,0 +1,14 @@
+Differenze tra -sT e -sS
+Metodo di Scansione:
+
+-sT (TCP Connect Scan): Questo tipo di scansione utilizza una connessione completa TCP per determinare se una porta è aperta. Esegue un handshake completo a tre vie (SYN, SYN-ACK, ACK) con il server target.
+-sS (SYN Scan): Questo tipo di scansione è noto come "half-open" o "stealth" scan. Invia un pacchetto SYN e attende un pacchetto SYN-ACK in risposta. Se riceve un SYN-ACK, la porta è considerata aperta e Nmap invia un RST per interrompere la connessione, senza completare l'handshake.
+Visibilità e Log:
+
+-sT (TCP Connect Scan): Poiché stabilisce una connessione completa, questo tipo di scansione è più probabile che venga rilevato e registrato nei log del sistema target.
+-sS (SYN Scan): Non stabilisce una connessione completa, quindi è meno probabile che venga rilevato e registrato nei log del sistema target, rendendolo più "silenzioso" o stealth.
+
+Permessi Necessari:
+
+-sT (TCP Connect Scan): Può essere eseguito da utenti non privilegiati perché utilizza il sistema operativo per stabilire connessioni TCP standard.
+-sS (SYN Scan): Richiede privilegi di root o amministrativi perché necessita di inviare e ricevere pacchetti TCP raw.
